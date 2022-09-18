@@ -126,7 +126,6 @@ class Contact {
 /// | => The fourth thing we have to do is to update `contact(...)` function to use `value` instead. After all this, we won't     |
 /// |    have to have separate list `final List<Contact> _contacts = [];`                                                         |
 /// +-----------------------------------------------------------------------------------------------------------------------------+
-
 class ContactBook extends ValueNotifier<List<Contact>> {
   ContactBook._sharedInstance() : super([]);
   static final ContactBook _shared = ContactBook._sharedInstance();
@@ -181,10 +180,32 @@ class ContactBook extends ValueNotifier<List<Contact>> {
 /// |    your data and the user interface.. So, we need to work on this and grab the data the NewContactView widget created and after |
 /// |    putting it inside Contact, we'll refresh the HomePage.                                                                       |
 /// +---------------------------------------------------------------------------------------------------------------------------------+
+/// +                                                                                                                                 +
+/// +                                                        REBUILDING HOMEPAGE                                                      +
+/// +                                                                                                                                 +
+/// +---------------------------------------------------------------------------------------------------------------------------------+
+/// | Now, we have to listen to the changes to the ValueNotifier and rebuild our HomePage because we can see that the ListView at the |
+/// | moment is just saying "we have this amount of ContactBook length and just build the items". It has no idea when those things    |
+/// | change, when the amount of contacts in the list changes. So, we need to work with `ValueListenableBuilder` which is a widget    |
+/// | whose content stays synced with a [ValueListenable] in this case, the `ValueNotifier`. When looked at its source code, we can   |
+/// | see that it's a `StatefulWidget` widget as it has to "rebuild" itself when things change internally (kind of like keeping the   |
+/// | state).                                                                                                                         |
+/// | => We'll use `ValueListenableBuilder` inside the body. For that, we'll wrap the ListView with `ValueListenableBuilder` widget   |
+/// |    and the [valueListenable] parameter which will then be watched.                                                              |
+/// | => Now, let's see how we can actually implement the contacts on the screen. For that, we need to have Dismissible cells which   |
+/// |    is a widget which allows you to SWIPE on an object in order to dismiss it. Now, instead of the ContactBook, we'll use        |
+/// |    Value as List of Contacts. This value is thevalue that the contact book hold on to. ContactBook is a ValueNotifier of a List |
+/// |    of Contacts. So, the value propogated down to `final contacts = value;` is a List of Contacts. Now, instead of going to the  |
+/// |    ContactBook, we'll go inside the Contacts at that Index (`final contact = contacts[index];`).                                |
+/// | => Now, wrap the `ListTile` in a `Dismissible` widget and we'll give the `key` a `ValueKey` as Dismissible has to uniquely      |
+/// |    identify every object and heer, the KEY is important as we have IDed our contacts. So, we return a ValueKey of `contacts.id` |
+/// |    and for some design implementation, we'll again wrap the ListTile in `Material` widget. After this, we have to implement the |
+/// |    `onDismissed` in which we will `remove` the contact from ContactBook (this is the better way to implement it instead of just |
+/// |    removing from the List of Contacts which may give errors while debugging).                                                   |
+/// +---------------------------------------------------------------------------------------------------------------------------------+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final contactBook = ContactBook();
     return Scaffold(
       // APP BAR
       appBar: AppBar(
@@ -194,12 +215,28 @@ class _HomePageState extends State<HomePage> {
       ),
 
       // BODY
-      body: ListView.builder(
-        itemCount: contactBook.length,
-        itemBuilder: (context, index) {
-          final contact = contactBook.contact(atIndex: index)!;
-          return ListTile(
-            title: Text(contact.name),
+      body: ValueListenableBuilder(
+        valueListenable: ContactBook(),
+        builder: (context, value, child) {
+          final contacts = value;
+          return ListView.builder(
+            itemCount: contacts.length,
+            itemBuilder: (context, index) {
+              final contact = contacts[index];
+              return Dismissible(
+                onDismissed: (direction) {
+                  ContactBook().remove(contact: contact);
+                },
+                key: ValueKey(contact.id),
+                child: Material(
+                  color: Colors.white,
+                  elevation: 6.0,
+                  child: ListTile(
+                    title: Text(contact.name),
+                  ),
+                ),
+              );
+            },
           );
         },
       ),

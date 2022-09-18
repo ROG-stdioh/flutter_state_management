@@ -1,6 +1,8 @@
 # **CHANGE LOG**
 
-- State Management
+- Rebuilding the HomePage and ChangeLog
+  - Used the functions and incorporated it in the UI
+- ValueNotifiers and ChangeLog
   - Used ValueNotifiers for managing and listening the changes made when adding/deleting the contacts.
 - NewContact
   - Added NeContactView which will be used for Adding New Contacts
