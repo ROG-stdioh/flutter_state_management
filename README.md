@@ -54,6 +54,8 @@ I am a Third Year, Computer Engineering student at Army Institute of Technology,
 
 ![](https://media.giphy.com/media/111ebonMs90YLu/giphy.gif)
 
-Socials: [LinkedIn](https://www.linkedin.com/in/surya2807/) and [Instagram](instagram.com/a.k.a._surya/)
+<p align='center'> <a href="https://www.linkedin.com/in/surya2807/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>&nbsp;&nbsp;  <a href="https://www.instagram.com/a.k.a._surya/"><img src="https://img.shields.io/badge/instagram-%23E4405F.svg?&style=for-the-badge&logo=instagram&logoColor=white" />        
+  </a>&nbsp;&nbsp; </p>
 
 ---
