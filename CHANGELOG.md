@@ -1,5 +1,7 @@
 # **CHANGE LOG**
 
+- State Management
+  - Used ValueNotifiers for managing and listening the changes made when adding/deleting the contacts.
 - NewContact
   - Added NeContactView which will be used for Adding New Contacts
 - adding functions and readme update
