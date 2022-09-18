@@ -33,6 +33,21 @@ First, in the `main.dart` file, make a `stl` widget that returns a `material app
 
 ---
 
+## This is JUST the start!!
+
+This is one of the classic ways of managing state with a singleton ValueNotifier. Here, we used ValueNotifiers and ChangeNotifiers for managing states in Flutter the, you have some builders that _listens_ to those changes.
+
+This is for **very** simple cases like when we don't want to depend on any external packages and want to do something that is just supported by Flutter.
+
+Remember that Flutter has lot more than just ValueNotifier and ChangeNotifiers which we'll discuss in other branches.
+
+- Note: These are some resources to get you started if this is your first Flutter project:
+
+  - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+  - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+---
+
 ## **About me**
 
 I am a Third Year, Computer Engineering student at Army Institute of Technology, Pune who loves UI/UX, Flutter, Digital Art and a good slice of Pizza 😊.

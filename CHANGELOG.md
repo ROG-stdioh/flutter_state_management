@@ -1,5 +1,7 @@
 # **CHANGE LOG**
 
+- readme update (pt. 1)
+  - Updated readme
 - Rebuilding the HomePage and ChangeLog
   - Used the functions and incorporated it in the UI
 - ValueNotifiers and ChangeLog
