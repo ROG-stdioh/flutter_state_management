@@ -1,5 +1,6 @@
 # **CHANGE LOG**
 
+- flutter upgrade
 - readme update (pt. 1)
   - Updated readme
 - Rebuilding the HomePage and ChangeLog
